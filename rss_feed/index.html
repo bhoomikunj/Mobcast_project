@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>News Articles Table</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>News Articles</h1>
+    <table id="newsTable" class="display">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Link</th>
+                <th>Published Date</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#newsTable').DataTable({
+                "ajax": "fetch_data.php",
+                "columns": [
+                    { "data": "title" },
+                    { "data": "link", "render": function(data, type, row) {
+                        return `<a href="${data}" target="_blank">Link</a>`;
+                    }},
+                    { "data": "pubDate" },
+                    { "data": "description" }
+                ]
+            });
+        });
+    </script>
+</body>
+</html>
